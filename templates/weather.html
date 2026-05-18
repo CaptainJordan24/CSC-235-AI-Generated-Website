@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="section-header mb-4">
+  <span class="eyebrow">Weather check</span>
+  <h1>CT hiking weather guide</h1>
+  <p class="lead">Local conditions matter. Use this page to choose the right day and gear for hiking.</p>
+</div>
+
+<div class="row g-4 align-items-stretch">
+  <div class="col-lg-5 card weather-card p-4">
+    <h2>Region</h2>
+    <p>Select a Connecticut hiking region to see forecast highlights and packing tips.</p>
+    <div class="mb-3">
+      <label for="region-select" class="form-label">Choose a region</label>
+      <select id="region-select" class="form-select" aria-controls="weather-output">
+        <option value="northern">Litchfield Hills</option>
+        <option value="central">Central CT</option>
+        <option value="southern">Southern Shore</option>
+        <option value="western">Western Highlands</option>
+      </select>
+    </div>
+    <div id="weather-output" class="mt-4" aria-live="polite">
+      <p class="mb-1 fw-semibold">Temperature:</p>
+      <p id="temp" class="fs-3">68°F</p>
+      <p id="condition">Partly cloudy with light breeze.</p>
+      <p id="advice" class="mt-3"></p>
+    </div>
+  </div>
+  <div class="col-lg-7 card weather-visual p-4">
+    <h2>Accessible conditions</h2>
+    <p>Weather changes quickly in Connecticut. This guide helps you interpret each region with a beginner-friendly focus.</p>
+    <ul>
+      <li>Bring extra layers in northern and western hills.</li>
+      <li>Watch for wet rock and muddy trail sections after rain.</li>
+      <li>Check sunrise and sunset times before your hike.</li>
+    </ul>
+  </div>
+</div>
+{% endblock %}

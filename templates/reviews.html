@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="section-header mb-4">
+  <span class="eyebrow">Community voices</span>
+  <h1>What new hikers say</h1>
+  <p class="lead">Read honest beginner reviews of CT trails and add your own experience.</p>
+</div>
+
+{% if message %}
+<div class="alert alert-success" role="status">{{ message }}</div>
+{% endif %}
+
+<form class="review-form card p-4 mb-5" method="post" action="{{ url_for('reviews') }}" aria-labelledby="review-form-title">
+  <h2 id="review-form-title">Submit a beginner-friendly review</h2>
+  <div class="mb-3">
+    <label for="name" class="form-label">Name</label>
+    <input id="name" name="name" type="text" class="form-control" placeholder="First name or nickname" required>
+  </div>
+  <div class="mb-3">
+    <label for="trail" class="form-label">Trail</label>
+    <input id="trail" name="trail" type="text" class="form-control" placeholder="Trail name" required>
+  </div>
+  <div class="mb-3">
+    <label for="rating" class="form-label">Rating</label>
+    <select id="rating" name="rating" class="form-select" required>
+      <option value="5">5 stars</option>
+      <option value="4">4 stars</option>
+      <option value="3">3 stars</option>
+      <option value="2">2 stars</option>
+      <option value="1">1 star</option>
+    </select>
+  </div>
+  <div class="mb-3">
+    <label for="comment" class="form-label">Your review</label>
+    <textarea id="comment" name="comment" class="form-control" rows="4" placeholder="What did you enjoy?" required></textarea>
+  </div>
+  <button type="submit" class="btn btn-success">Add review</button>
+</form>
+
+<div class="row g-4">
+  {% if reviews %}
+    {% for review in reviews %}
+    <article class="col-md-6 card review-card p-4">
+      <h3>{{ review['trail'] }}</h3>
+      <p class="small text-muted">by {{ review['name'] }} • {{ review['created_at'] }}</p>
+      <p aria-label="Rating: {{ review['rating'] }} out of 5 stars">{{ '★' * review['rating'] }}{{ '☆' * (5 - review['rating']) }}</p>
+      <p>{{ review['comment'] }}</p>
+    </article>
+    {% endfor %}
+  {% else %}
+    <div class="col-12 card p-4">
+      <p>No reviews yet. Be the first to share a beginner-friendly hike.</p>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}
